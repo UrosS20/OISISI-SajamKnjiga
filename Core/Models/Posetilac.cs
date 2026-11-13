@@ -34,8 +34,7 @@ namespace Core.Models
             ProsecnaOcenaRecenzije = procena;
         }
 
-        public Posetilac(int ID, string brckarte, string ime, string prezime, DateOnly datrodjenja, string kontaktel, string email,
-                         int trengodcla, StatusPosetioca status, double prosecnaocena)
+        public Posetilac(int ID, string brckarte, string ime, string prezime, DateOnly datrodjenja, string kontaktel, string email, int trenGodCla, StatusPosetioca status, double prosecnaocena)
         {
             Id = ID;
             BrojClanskeKarte = brckarte;
@@ -44,7 +43,7 @@ namespace Core.Models
             DatumRodjenja = datrodjenja;
             KontaktTelefon = kontaktel;
             Email = email;
-            TrenutnaGodinaClanstva = trengodcla;
+            TrenutnaGodinaClanstva = trenGodCla;
             Status = status;
             ProsecnaOcenaRecenzije = prosecnaocena;
         }
