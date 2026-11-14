@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.Models
 {
-    internal class Kupovina:ISerializable
+    internal class Kupovina : ISerializable
     {
         public int Id { get; set; }
         public Posetilac PosetilacKupuje { get; set; } = new Posetilac();
@@ -30,5 +30,7 @@ namespace Core.Models
             Ocena = ocena;
             Komentar = komentar;
         }
+
+
     }
 }

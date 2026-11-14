@@ -21,31 +21,31 @@ namespace Core.Models
 
         public Posetilac() { }
 
-        public Posetilac(string brckarte, string ime, string prezime, DateOnly datrodjenja, string kontaktel, string email, int trenGodCla, StatusPosetioca status, double procena)
+        public Posetilac(string brcKarte, string ime, string prezime, DateOnly datRodjenja, string kontaktTel, string email, int trenGodCla, StatusPosetioca status, double prOcena)
         {
-            BrojClanskeKarte = brckarte;
+            BrojClanskeKarte = brcKarte;
             Ime = ime;
             Prezime = prezime;
-            DatumRodjenja = datrodjenja;
-            KontaktTelefon = kontaktel;
+            DatumRodjenja = datRodjenja;
+            KontaktTelefon = kontaktTel;
             Email = email;
             TrenutnaGodinaClanstva = trenGodCla;
             Status = status;
-            ProsecnaOcenaRecenzije = procena;
+            ProsecnaOcenaRecenzije = prOcena;
         }
 
-        public Posetilac(int ID, string brckarte, string ime, string prezime, DateOnly datrodjenja, string kontaktel, string email, int trenGodCla, StatusPosetioca status, double prosecnaocena)
+        public Posetilac(int ID, string brcKarte, string ime, string prezime, DateOnly datRodjenja, string kontaktTel, string email, int trenGodCla, StatusPosetioca status, double prosecnaOcena)
         {
             Id = ID;
-            BrojClanskeKarte = brckarte;
+            BrojClanskeKarte = brcKarte;
             Ime = ime;
             Prezime = prezime;
-            DatumRodjenja = datrodjenja;
-            KontaktTelefon = kontaktel;
+            DatumRodjenja = datRodjenja;
+            KontaktTelefon = kontaktTel;
             Email = email;
             TrenutnaGodinaClanstva = trenGodCla;
             Status = status;
-            ProsecnaOcenaRecenzije = prosecnaocena;
+            ProsecnaOcenaRecenzije = prosecnaOcena;
         }
     }
 }
