@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Storage.Serialization;
 
 namespace Core.Models
 {
-    internal class Izdavac : ISerializable
+    public class Izdavac : ISerializable
     {
         public int Id { get; set; }
         public string Naziv { get; set; } = string.Empty;

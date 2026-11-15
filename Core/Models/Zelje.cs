@@ -5,7 +5,7 @@ using Core.Storage.Serialization;
 
 namespace Core.Models
 {
-    internal class Zelje : ISerializable
+    public class Zelje : ISerializable
     {
         public string BrojClanskeKarte { get; set; } = string.Empty;
         public string KnjigaId { get; set; } = string.Empty;
