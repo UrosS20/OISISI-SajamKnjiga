@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Core.Storage.Serialization;
 using System.Text;
 
 namespace Core.Models
@@ -65,8 +65,8 @@ namespace Core.Models
                 Id = int.Parse(v[2])
             };
 
-            DatumKupovine = DateOnly.ParseExact(v[3], "yyyy-MM-dd");
-            Ocena = int.Parse(v[4]);
+            DatumKupovine = DateTime.ParseExact(v[3], "yyyy-MM-dd", null);
+            Ocena = double.Parse(v[4]);
             Komentar = v[5];
         }
     }
