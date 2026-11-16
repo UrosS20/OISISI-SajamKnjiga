@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
+using Core.Models;
 using Core.Storage;
 
 namespace Core.DAO
@@ -13,7 +14,7 @@ namespace Core.DAO
 
         public KnjigaDAO()
         {
-            _storage = new Storage<Knjiga>("knjiga.txt");
+            _storage = new Storage<Knjiga>("knjiga.csv");
             _knjige = _storage.Load();
         }
 

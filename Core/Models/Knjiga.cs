@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Core.Models;
 using Core.Storage.Serialization;
 
-
+namespace Core.Models
+{
     public class Knjiga : ISerializable
     {   
         public int Id { get; set; }
@@ -87,3 +87,4 @@ using Core.Storage.Serialization;
             return sb.ToString();
         }
     }
+}

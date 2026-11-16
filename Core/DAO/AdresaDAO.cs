@@ -14,7 +14,7 @@ namespace Core.DAO
 
         public AdresaDAO()
         {
-            _storage = new Storage<Adresa>("adresa.txt");
+            _storage = new Storage<Adresa>("adresa.csv");
             _adrese = _storage.Load();
         }
 
@@ -56,7 +56,7 @@ namespace Core.DAO
             return adresa;
         }
 
-        public Adresa GetAdresaByID(int id)
+        public Adresa? GetAdresaByID(int id)
         {
             return _adrese.Find(a => a.Id == id);
         }

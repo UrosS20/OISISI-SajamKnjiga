@@ -1,4 +1,5 @@
 ﻿using Core.Models;
+using Core.Storage;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -39,6 +40,7 @@ namespace Core.DAO
             oldPosetialac.Ime = posetilac.Ime;
             oldPosetialac.Prezime = posetilac.Prezime;
             oldPosetialac.DatumRodjenja = posetilac.DatumRodjenja;
+            oldPosetialac.Adresa = posetilac.Adresa;
             oldPosetialac.KontaktTelefon = posetilac.KontaktTelefon;
             oldPosetialac.Email = posetilac.Email;
             oldPosetialac.BrojClanskeKarte = posetilac.BrojClanskeKarte;

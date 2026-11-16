@@ -14,7 +14,7 @@ namespace Core.DAO
 
         public AutorDAO()
         {
-            _storage = new Storage<Autor>("autor.txt");
+            _storage = new Storage<Autor>("autor.csv");
             _autori = _storage.Load();
         }
 
@@ -40,7 +40,7 @@ namespace Core.DAO
             oldAutor.Ime = autor.Ime;
             oldAutor.Prezime = autor.Prezime;
             oldAutor.DatumRodjenja = autor.DatumRodjenja;
-            oldAutor.Adresa.Id = autor.Adresa.Id;
+            oldAutor.Adresa = autor.Adresa;
             oldAutor.Telefon = autor.Telefon;
             oldAutor.Email = autor.Email;
             oldAutor.BrojLicneKarte = autor.BrojLicneKarte;

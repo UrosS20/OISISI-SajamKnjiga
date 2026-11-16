@@ -45,7 +45,7 @@ namespace Core.Models
                 Ime,
                 Prezime,
                 DatumRodjenja.ToString(),
-                Adresa.ToString(), 
+                string.Join(";", Adresa.ToCSV()),
                 Telefon, 
                 Email,
                 BrojLicneKarte,

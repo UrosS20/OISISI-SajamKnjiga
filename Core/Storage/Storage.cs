@@ -1,60 +1,46 @@
-﻿using System;
+﻿using Core.Storage.Serialization;
+using System;
 using System.Collections.Generic;
+
 using System.Text;
-using Core.Storage.Serialization;
 
 namespace Core.Storage
 {
     public class Storage<T> where T : ISerializable, new()
     {
-        private string _filePath;
+        private readonly string _fileName;
         private readonly Serializer<T> _serializer = new();
 
         public Storage(string fileName)
         {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            DirectoryInfo? solutionRoot = Directory.GetParent(baseDir)?.Parent?.Parent?.Parent?.Parent;
+            string solutionRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", ".."));
+            string dataFolder = Path.Combine(solutionRoot, "Core", "Data");
 
-            if (solutionRoot == null)
+            if (!Directory.Exists(dataFolder))
+                Directory.CreateDirectory(dataFolder);
+
+            _fileName = Path.Combine(dataFolder, fileName);
+
+            if (!File.Exists(_fileName))
             {
-                throw new Exception("Ne mogu pronaći root");
+                File.Create(_fileName).Close();
             }
-
-            _filePath = Path.Combine(solutionRoot.FullName, "Data", fileName);
-
-            Console.WriteLine($"Storage FilePath: {_filePath}");
         }
 
         public List<T> Load()
         {
-            string? directory = Path.GetDirectoryName(_filePath);
-            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-                Console.WriteLine($"Kreiran folder: {directory}");
-            }
-
-            if (!File.Exists(_filePath))
-            {
-                FileStream fs = File.Create(_filePath);
-                fs.Close();
-                Console.WriteLine($"Kreiran prazan fajl: {_filePath}");
-                return new List<T>();
-            }
-
-            IEnumerable<string> lines = File.ReadLines(_filePath);
-            List<T> objects = _serializer.FromCSV(lines);
-
-            return objects;
+            IEnumerable<string> lines = File.ReadLines(_fileName);
+            return _serializer.FromCSV(lines);
         }
 
         public void Save(List<T> objects)
         {
             string serializedObjects = _serializer.ToCSV(objects);
-            using (StreamWriter streamWriter = new StreamWriter(_filePath))
+            using (StreamWriter streamWriter = new StreamWriter(_fileName))
             {
                 streamWriter.Write(serializedObjects);
             }
         }
+
     }
 }
