@@ -1,11 +1,4 @@
-﻿2|CK-002|Ana|Jovanovic|1990-03-14|0;Bulevar Oslobođenja;15;Novi Sad;Srbija|062123456|ana.jovanovic@example.com|2024|R|425.00
-3|CK-003|Petar|Petrovic|1988-07-22|0;Vojvode Stepe;7;Beograd;Srbija|063234567|petar.petrovic@example.com|2023|R|0.00
-4|CK-004|Jelena|Ilic|1997-11-05|0;Ulica Kralja Petra;6;Beograd;Srbija|064345678|jelena.ilic@example.com|2025|V|300.00
-5|CK-005|Nikola|Djordjevic|1985-01-30|0;Njegoševa;22;Novi Sad;Srbija|065456789|nikola.djordjevic@example.com|2022|R|0.00
-6|CK-006|Milica|Stankovic|1993-09-18|0;Zmaj Jovina;3;Novi Sad;Srbija|066567890|milica.stankovic@example.com|2024|R|450.00
-7|CK-007|Stefan|Nikolic|1991-04-12|0;Terazije;18;Beograd;Srbija|067678901|stefan.nikolic@example.com|2021|V|0.00
-8|CK-008|Katarina|Pavlovic|1999-06-25|0;Balkanska;7;Beograd;Srbija|068789012|katarina.pavlovic@example.com|2026|R|0.00
-9|CK-009|Aleksandar|Ristic|1987-12-08|0;Cara Dušana;11;Sarajevo;BiH|069890123|aleksandar.ristic@example.com|2023|R|450.00
-10|CK-010|Tamara|Radovic|1994-02-17|0;Skadarska;4;Beograd;Srbija|060901234|tamara.radovic@example.com|2025|V|0.00
-11|CK-011|Marko|Vasic|1996-08-29|0;Riva;5;Zadar;Hrvatska|061012345|marko.vasic@example.com|2024|R|8.33
-12|CK-012|Isidora|Jokic|2003-08-25|0;Bulevar Oslobodjena;7;Novi Sad;Srbija|061111111|isidora@gmail.com|2018|V|350.00
+﻿1|CL-101|Luka|Marković|1992-02-11|1;Bulevar Evrope;42;Novi Sad;Srbija|061111111|luka.markovic@example.com|2022|R|4.50
+2|CL-102|Sofija|Nikolić|1996-07-24|2;Knez Mihailova;18;Beograd;Srbija|062222222|sofija.nikolic@example.com|2023|V|5.00
+3|CL-103|Vuk|Jovanović|1989-10-03|3;Vojvode Stepe;27;Beograd;Srbija|063333333|vuk.jovanovic@example.com|2021|R|4.00
+4|CL-104|Teodora|Ilić|2000-12-19|4;Jevrejska;9;Novi Sad;Srbija|064444444|teodora.ilic@example.com|2024|V|3.50

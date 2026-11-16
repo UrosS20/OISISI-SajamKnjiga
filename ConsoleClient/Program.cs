@@ -8,6 +8,7 @@ var izdavacDao = new IzdavacDAO();
 var knjigaDao = new KnjigaDAO();
 var posetilacDao = new PosetilacDAO();
 var kupovinaDao = new KupovinaDAO();
+var zeljeDao = new ZeljeDAO();
 
 while (true)
 {
@@ -19,6 +20,7 @@ while (true)
     Console.WriteLine("4. Knjige");
     Console.WriteLine("5. Posetioci");
     Console.WriteLine("6. Kupovine");
+    Console.WriteLine("7. Lista želja");
     Console.WriteLine("0. Izlaz");
 
     switch (ReadText("Izbor: "))
@@ -29,8 +31,104 @@ while (true)
         case "4": BookMenu(); break;
         case "5": VisitorMenu(); break;
         case "6": PurchaseMenu(); break;
+        case "7": WishlistMenu(); break;
         case "0": return;
         default: Pause("Nepoznata opcija."); break;
+    }
+}
+
+void WishlistMenu()
+{
+    while (true)
+    {
+        Console.Clear();
+        Console.WriteLine("=== LISTA ŽELJA ===");
+        Console.WriteLine("1. Dodaj knjigu na listu želja");
+        Console.WriteLine("2. Prikaži listu želja posetioca");
+        Console.WriteLine("3. Ukloni knjigu sa liste želja");
+        Console.WriteLine("4. Kupi knjigu sa liste želja");
+        Console.WriteLine("5. Prikaži sve stavke lista želja");
+        Console.WriteLine("0. Nazad");
+
+        switch (ReadText("Izbor: "))
+        {
+            case "1":
+            {
+                string cardNumber = ReadText("Broj članske karte: ");
+                int bookId = ReadInt("ID knjige: ");
+
+                if (posetilacDao.GetAllPosetioci().All(p => p.BrojClanskeKarte != cardNumber))
+                {
+                    Pause("Posetilac ne postoji.");
+                    break;
+                }
+
+                if (knjigaDao.GetKnjigaByID(bookId) == null)
+                {
+                    Pause("Knjiga ne postoji.");
+                    break;
+                }
+
+                try
+                {
+                    zeljeDao.AddZelja(cardNumber, bookId);
+                    Pause("Knjiga je dodata na listu želja.");
+                }
+                catch (InvalidOperationException exception)
+                {
+                    Pause(exception.Message);
+                }
+                break;
+            }
+            case "2":
+            {
+                string cardNumber = ReadText("Broj članske karte: ");
+                PrintWishlist(zeljeDao.GetZeljeZaPosetioca(cardNumber));
+                break;
+            }
+            case "3":
+            {
+                string cardNumber = ReadText("Broj članske karte: ");
+                int bookId = ReadInt("ID knjige: ");
+                Pause(zeljeDao.RemoveZelja(cardNumber, bookId) == null
+                    ? "Knjiga nije na listi želja."
+                    : "Knjiga je uklonjena sa liste želja.");
+                break;
+            }
+            case "4":
+            {
+                string cardNumber = ReadText("Broj članske karte: ");
+                int bookId = ReadInt("ID knjige: ");
+                Zelje? zelja = zeljeDao.GetZelja(cardNumber, bookId);
+
+                if (zelja == null)
+                {
+                    Pause("Knjiga nije na listi želja.");
+                    break;
+                }
+
+                Kupovina kupovina = new(
+                    0,
+                    ReadDateTime("Datum kupovine (yyyy-MM-dd): "),
+                    ReadDouble("Ocena: "),
+                    ReadText("Komentar: "))
+                {
+                    BrojClanskeKarte = cardNumber,
+                    PosetilacKupuje = new Posetilac { BrojClanskeKarte = cardNumber },
+                    KupljenaKnjiga = new Knjiga { Id = bookId }
+                };
+
+                kupovinaDao.AddKupovina(kupovina);
+                zeljeDao.RemoveZelja(cardNumber, bookId);
+                Pause("Kupovina je upisana, a knjiga uklonjena sa liste želja.");
+                break;
+            }
+            case "5":
+                PrintWishlist(zeljeDao.GetAllZelje());
+                break;
+            case "0": return;
+            default: Pause("Nepoznata opcija."); break;
+        }
     }
 }
 
@@ -278,6 +376,25 @@ void ShowCrudMenu(string name)
     Console.WriteLine("3. Brisanje");
     Console.WriteLine("4. Prikaz svih");
     Console.WriteLine("0. Nazad");
+}
+
+void PrintWishlist(IEnumerable<Zelje> wishes)
+{
+    Console.Clear();
+    bool hasItems = false;
+
+    foreach (Zelje wish in wishes)
+    {
+        hasItems = true;
+        int bookId = int.Parse(wish.KnjigaId);
+        Knjiga? book = knjigaDao.GetKnjigaByID(bookId);
+        Console.WriteLine($"Članska karta: {wish.BrojClanskeKarte}");
+        Console.WriteLine($"Knjiga: {(book == null ? $"ID {bookId}" : $"{book.Naziv} (ID {book.Id})")}");
+        Console.WriteLine("--------------------");
+    }
+
+    if (!hasItems) Console.WriteLine("Lista želja je prazna.");
+    Pause();
 }
 
 void PrintAll<T>(IEnumerable<T> values)
