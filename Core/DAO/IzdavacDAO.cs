@@ -7,7 +7,7 @@ namespace Core.DAO
 {
     public class IzdavacDAO
     {
-        private readonly Storage<Izdavac> _storage;
+        private Storage<Izdavac> _storage;
         private List<Izdavac> _izdavaci;
 
         public IzdavacDAO()
