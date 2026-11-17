@@ -6,6 +6,11 @@ using System.Text;
 
 namespace Core.Models
 {
+    enum StatusPosetioca
+    {
+        R,
+        V
+    }
     public class Posetilac : ISerializable
     {
         public int Id { get; set; }
