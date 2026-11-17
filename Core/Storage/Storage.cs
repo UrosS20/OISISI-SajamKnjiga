@@ -41,6 +41,5 @@ namespace Core.Storage
                 streamWriter.Write(serializedObjects);
             }
         }
-
     }
 }
