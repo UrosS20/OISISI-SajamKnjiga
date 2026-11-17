@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using Core.Storage.Serialization;
 
@@ -44,7 +45,7 @@ namespace Core.Models
                 Id.ToString(),
                 Ime,
                 Prezime,
-                DatumRodjenja.ToString(),
+                DatumRodjenja.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
                 string.Join(";", Adresa.ToCSV()),
                 Telefon, 
                 Email,
@@ -59,7 +60,11 @@ namespace Core.Models
             Id = int.Parse(s[0]);
             Ime = s[1];
             Prezime = s[2];
-            DatumRodjenja = DateOnly.ParseExact(s[3], "yyyy-MM-dd");
+            DatumRodjenja = DateOnly.ParseExact(
+                s[3],
+                new[] { "yyyy-MM-dd", "M/d/yyyy" },
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None);
 
             Adresa = new Adresa();
             Adresa.FromCSV(s[4].Split(';'));

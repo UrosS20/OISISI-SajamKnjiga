@@ -160,6 +160,7 @@ void AuthorMenu()
     while (true)
     {
         ShowCrudMenu("AUTORI");
+        Console.WriteLine("5. Pretraga");
         switch (ReadText("Izbor: "))
         {
             case "1": autorDao.AddAutor(ReadAuthor()); Pause("Autor je dodat."); break;
@@ -170,6 +171,7 @@ void AuthorMenu()
                 break;
             case "3": Pause(autorDao.RemoveAutor(ReadInt("ID autora: ")) == null ? "Autor ne postoji." : "Autor je obrisan."); break;
             case "4": PrintAll(autorDao.GetAllAutor()); break;
+            case "5": PrintAll(autorDao.Search(ReadText("Pretraga autora: "))); break;
             case "0": return;
             default: Pause("Nepoznata opcija."); break;
         }
@@ -203,6 +205,7 @@ void BookMenu()
     while (true)
     {
         ShowCrudMenu("KNJIGE");
+        Console.WriteLine("5. Pretraga");
         switch (ReadText("Izbor: "))
         {
             case "1": knjigaDao.AddKnjiga(ReadBook()); Pause("Knjiga je dodata."); break;
@@ -213,6 +216,7 @@ void BookMenu()
                 break;
             case "3": Pause(knjigaDao.RemoveKnjiga(ReadInt("ID knjige: ")) == null ? "Knjiga ne postoji." : "Knjiga je obrisana."); break;
             case "4": PrintAll(knjigaDao.GetAllKnjige()); break;
+            case "5": PrintAll(knjigaDao.Search(ReadText("Pretraga knjiga: "))); break;
             case "0": return;
             default: Pause("Nepoznata opcija."); break;
         }
@@ -223,7 +227,14 @@ void VisitorMenu()
 {
     while (true)
     {
-        ShowCrudMenu("POSEТIOCI");
+        Console.Clear();
+        Console.WriteLine("=== POSETIOCI ===");
+        Console.WriteLine("1. Dodavanje");
+        Console.WriteLine("2. Izmena");
+        Console.WriteLine("3. Brisanje");
+        Console.WriteLine("4. Prikaži sve");
+        Console.WriteLine("5. Prikaži profil po ID-u");
+        Console.WriteLine("0. Nazad");
         switch (ReadText("Izbor: "))
         {
             case "1": posetilacDao.AddPosetilac(ReadVisitor()); Pause("Posetilac je dodat."); break;
@@ -234,6 +245,24 @@ void VisitorMenu()
                 break;
             case "3": Pause(posetilacDao.RemovePosetilac(ReadInt("ID posetioca: ")) == null ? "Posetilac ne postoji." : "Posetilac je obrisan."); break;
             case "4": PrintAll(posetilacDao.GetAllPosetioci()); break;
+            case "5":
+            {
+                int visitorId = ReadInt("ID posetioca: ");
+                Posetilac? visitor = posetilacDao.GetPosetilacByID(visitorId);
+
+                Console.Clear();
+                if (visitor == null)
+                {
+                    Pause("Posetilac ne postoji.");
+                    break;
+                }
+
+                Console.WriteLine("=== PROFIL POSETIOCA ===");
+                Console.WriteLine(visitor);
+                Pause();
+                break;
+            }
+            case "6": PrintAll(posetilacDao.GetAllPosetioci()); break;
             case "0": return;
             default: Pause("Nepoznata opcija."); break;
         }

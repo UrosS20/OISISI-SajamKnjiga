@@ -68,6 +68,17 @@ namespace Core.DAO
             return _knjige.Find(k => k.Id == id);
         }
 
+        public List<Knjiga> Search(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query)) return new List<Knjiga>();
+
+            return _knjige.Where(k =>
+                k.ISBN.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                k.Naziv.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                k.ZanrKnjige.Contains(query, StringComparison.CurrentCultureIgnoreCase))
+                .ToList();
+        }
+
         public List<Knjiga> GetAllKnjige(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
         {
             IEnumerable<Knjiga> knjige = _knjige;

@@ -70,6 +70,19 @@ namespace Core.DAO
             return _autori.Find(a => a.Id == id);
         }
 
+        public List<Autor> Search(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query)) return new List<Autor>();
+
+            return _autori.Where(a =>
+                a.Ime.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                a.Prezime.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                a.Telefon.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                a.Email.Contains(query, StringComparison.CurrentCultureIgnoreCase) ||
+                a.BrojLicneKarte.Contains(query, StringComparison.CurrentCultureIgnoreCase))
+                .ToList();
+        }
+
         public void Reload()
         {
             _autori = _storage.Load();
