@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Core.Storage.Serialization;
 using System.Text;
 
@@ -77,7 +78,7 @@ namespace Core.Models
 
             string[] v =
             {
-                Id.ToString(),
+                Id.ToString(CultureInfo.InvariantCulture),
                 BrojClanskeKarte,
                 Ime,
                 Prezime,
@@ -85,16 +86,16 @@ namespace Core.Models
                 adresaCsv,
                 KontaktTelefon,
                 Email,
-                TrenutnaGodinaClanstva.ToString(),
+                TrenutnaGodinaClanstva.ToString(CultureInfo.InvariantCulture),
                 Status.ToString(),
-                ProsecnaOcenaRecenzije.ToString("F2")
+                ProsecnaOcenaRecenzije.ToString("F2", CultureInfo.InvariantCulture)
             };
             return v;
         }
 
         public void FromCSV(string[] v)
         {
-            Id = int.Parse(v[0]);
+            Id = int.Parse(v[0], CultureInfo.InvariantCulture);
             BrojClanskeKarte = v[1];
             Ime = v[2];
             Prezime = v[3];
@@ -105,9 +106,9 @@ namespace Core.Models
 
             KontaktTelefon = v[6];
             Email = v[7];
-            TrenutnaGodinaClanstva = int.Parse(v[8]);
+            TrenutnaGodinaClanstva = int.Parse(v[8], CultureInfo.InvariantCulture);
             Status = Enum.Parse<StatusPosetioca>(v[9]);
-            ProsecnaOcenaRecenzije = double.Parse(v[10]);
+            ProsecnaOcenaRecenzije = double.Parse(v[10], CultureInfo.InvariantCulture);
         }
     }
 }

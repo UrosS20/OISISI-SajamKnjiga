@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Core.Storage.Serialization;
 using System.Text;
 
@@ -45,28 +46,28 @@ namespace Core.Models
         {
             string[] v =
             {
-                Id.ToString(),
+                Id.ToString(CultureInfo.InvariantCulture),
                 PosetilacKupuje.BrojClanskeKarte,
-                KupljenaKnjiga.Id.ToString(),
+                KupljenaKnjiga.Id.ToString(CultureInfo.InvariantCulture),
                 DatumKupovine.ToString("yyyy-MM-dd"),
-                Ocena.ToString(),
+                Ocena.ToString(CultureInfo.InvariantCulture),
                 Komentar
             };
             return v;
         }
         public void FromCSV(string[] v)
         {
-            Id = int.Parse(v[0]);
+            Id = int.Parse(v[0], CultureInfo.InvariantCulture);
             BrojClanskeKarte = v[1];
             PosetilacKupuje = new Posetilac();
             PosetilacKupuje.BrojClanskeKarte = v[1];
             KupljenaKnjiga = new Knjiga()
             {
-                Id = int.Parse(v[2])
+                Id = int.Parse(v[2], CultureInfo.InvariantCulture)
             };
 
             DatumKupovine = DateTime.ParseExact(v[3], "yyyy-MM-dd", null);
-            Ocena = double.Parse(v[4]);
+            Ocena = double.Parse(v[4], CultureInfo.InvariantCulture);
             Komentar = v[5];
         }
     }

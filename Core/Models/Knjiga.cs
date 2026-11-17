@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using Core.Storage.Serialization;
 
@@ -8,17 +9,17 @@ namespace Core.Models
     public class Knjiga : ISerializable
     {   
         public int Id { get; set; }
-        public string ISBN { get; set; }
-        public string Naziv { get; set; }
+        public string ISBN { get; set; } = string.Empty;
+        public string Naziv { get; set; } = string.Empty;
 
-        public string ZanrKnjige { get; set; }
+        public string ZanrKnjige { get; set; } = string.Empty;
 
         public int GodinaIzdanja { get; set; }
         public double Cena { get; set; }
         public int BrStrana { get; set; }
         public int IzdavacId { get; set; }
 
-        public Izdavac Izdavac { get; set; }
+        public Izdavac? Izdavac { get; set; }
 
         public List<Autor> Autori { get; set; }
         public List<Posetilac> Kupci { get; set; }
@@ -51,28 +52,28 @@ namespace Core.Models
         {
             string[] csvValues =
             {
-                Id.ToString(),
+                Id.ToString(CultureInfo.InvariantCulture),
                 ISBN,
                 Naziv,
                 ZanrKnjige,
-                GodinaIzdanja.ToString(),
-                Cena.ToString(),
-                BrStrana.ToString(),
-                IzdavacId.ToString()
+                GodinaIzdanja.ToString(CultureInfo.InvariantCulture),
+                Cena.ToString(CultureInfo.InvariantCulture),
+                BrStrana.ToString(CultureInfo.InvariantCulture),
+                IzdavacId.ToString(CultureInfo.InvariantCulture)
             };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
-            Id = int.Parse(values[0]);
+            Id = int.Parse(values[0], CultureInfo.InvariantCulture);
             ISBN = values[1];
             Naziv = values[2];
             ZanrKnjige = values[3];
-            GodinaIzdanja = int.Parse(values[4]);
-            Cena = double.Parse(values[5]);
-            BrStrana = int.Parse(values[6]);
-            IzdavacId = int.Parse(values[7]);
+            GodinaIzdanja = int.Parse(values[4], CultureInfo.InvariantCulture);
+            Cena = double.Parse(values[5], CultureInfo.InvariantCulture);
+            BrStrana = int.Parse(values[6], CultureInfo.InvariantCulture);
+            IzdavacId = int.Parse(values[7], CultureInfo.InvariantCulture);
         }
 
         public override string ToString()
